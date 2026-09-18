@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snugpie Self Studio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f4f6e9;
+            --primary: #ff8fa4;
+            --primary-hover: #fa7b93;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+
+        .highlight-pink { color: var(--primary); }
+
+        .handwriting {
+            font-family: 'Caveat', cursive;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            transform: rotate(-5deg);
+            display: inline-block;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            color: var(--text-dark);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background-color: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(255, 143, 164, 0.3); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+        
+        .btn-white { background-color: var(--white); color: var(--text-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        nav img { height: 40px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 0.95rem; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+        /* Hero Section */
+        .hero { display: flex; align-items: center; padding: 40px 0 80px 0; gap: 50px; }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
+        .hero-text p { color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem; max-width: 90%; }
+        .hero-features { display: flex; gap: 30px; margin-top: 40px; }
+        .feature { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-light); }
+        .feature i { color: var(--primary); font-size: 1.5rem; }
+        
+        /* Hero Visuals Statis */
+        .hero-visuals { 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        
+        .hero-main-img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--white);
+            padding: 60px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        /* Modifikasi About Image: Rasio 3:4 */
+        .about-img { 
+            width: 100%; 
+            max-width: 360px; 
+            aspect-ratio: 3 / 4; 
+            border-radius: 150px 30px 150px 30px; 
+            overflow: hidden; 
+            position: relative;
+            flex-shrink: 0; 
+        }
+        
+        .slideshow-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out; 
+        }
+        
+        .slideshow-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            flex-shrink: 0; 
+        }
+
+        .about-text { flex: 1; }
+        .about-text h2 { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
+        .about-text p { color: var(--text-light); font-size: 1.05rem; }
+
+        /* Location Section */
+        .location-section {
+            background: #fff;
+            padding: 40px 60px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .location-text { flex: 1; }
+        .location-text h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .location-text p { color: var(--text-light); margin-bottom: 10px; line-height: 1.6; }
+        .location-map { flex: 1; height: 300px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .location-map iframe { width: 100%; height: 100%; border: none; }
+
+        /* Services Grid */
+        .services-section { margin-bottom: 80px; }
+        .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+        .services-header h2 { font-size: 3rem; line-height: 1.2; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+        .service-card {
+            background: var(--white); padding: 20px; border-radius: 24px;
+            display: flex; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .service-img-wrap { width: 120px; height: 120px; border-radius: 16px; overflow: hidden; flex-shrink: 0; }
+        .service-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .service-info { display: flex; flex-direction: column; justify-content: center; }
+        .service-info h3 { font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin-bottom: 8px; }
+        .service-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.4; }
+        
+        /* Gallery Collage (Grid) */
+        .gallery-section { margin-bottom: 80px; text-align: center; }
+        .gallery-section h2 { font-size: 3.5rem; margin-bottom: 15px; }
+        .gallery-section p { color: var(--text-light); margin-bottom: 40px; }
+        
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .collage-item {
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .collage-item:hover img { transform: scale(1.08); }
+        
+        /* Setup rasio potrait & landscape */
+        .collage-portrait { aspect-ratio: 3/4; }
+        .collage-landscape { grid-column: span 2; aspect-ratio: 16/9; }
+
+        /* Pricelist Section */
+        .split-section { display: flex; align-items: center; gap: 40px; margin-bottom: 80px; padding: 40px 0; }
+        .split-text { flex: 1; }
+        .split-text h2 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+        .split-text p { color: var(--text-light); margin-bottom: 30px; }
+        
+        .pricelist-img-wrap {
+            flex: 1; transform: rotate(-3deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 8px; overflow: hidden; cursor: pointer;
+        }
+        .pricelist-img-wrap img { width: 100%; display: block; transition: transform 0.3s; }
+        .pricelist-img-wrap:hover img { transform: scale(1.05); }
+
+        /* CTA Banner */
+        .cta-banner {
+            background-color: var(--primary); border-radius: 30px;
+            padding: 40px 60px; display: flex; justify-content: space-between;
+            align-items: center; color: white; margin-bottom: 60px;
+        }
+        .cta-text h2 { font-family: 'Poppins', sans-serif; color: white; font-size: 2rem; margin-bottom: 10px; }
+        .cta-text p { opacity: 0.9; }
+
+        /* Footer */
+        footer { border-top: 1px solid #e0e0e0; padding: 40px 0 20px 0; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .footer-top img { height: 35px; }
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a {
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; background-color: var(--primary);
+            color: white; border-radius: 50%; text-decoration: none; transition: background 0.3s;
+        }
+        .social-icons a:hover { background-color: var(--text-dark); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; font-size: 0.85rem;
+            color: var(--text-light); border-top: 1px solid #e0e0e0; padding-top: 20px;
+        }
+
+        /* Modal / Popup Styles */
+        .modal {
+            display: none; position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal.show { display: flex; opacity: 1; }
+        .modal-content {
+            max-width: 90%; max-height: 90vh;
+            border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+        .close-modal {
+            position: absolute; top: 20px; right: 30px;
+            color: white; font-size: 40px; font-weight: bold; cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover { color: var(--primary); }
+
+        /* =========================================================
+           RESPONSIF UNTUK TABLET (Max Width 992px)
+           ========================================================= */
+        @media (max-width: 992px) {
+            .hero, .about-section, .location-section, .split-section { flex-direction: column; text-align: center; }
+            .hero-features { justify-content: center; flex-wrap: wrap; }
+            .hero-visuals { width: 100%; margin-top: 40px; }
+            
+            .nav-links, .services-header p { display: none; } /* Sembunyikan navigasi teks di HP/Tablet */
+            .services-header { flex-direction: column; align-items: center; text-align: center; }
+            
+            .cta-banner { flex-direction: column; text-align: center; gap: 20px; padding: 40px 30px; }
+            .footer-top { flex-direction: column; gap: 20px; text-align: center; }
+            
+            .collage-grid { grid-template-columns: repeat(2, 1fr); }
+            .collage-landscape { grid-column: span 2; }
+            
+            .split-text { padding-left: 0 !important; }
+            .pricelist-img-wrap { margin-top: 20px; }
+        }
+
+        /* =========================================================
+           RESPONSIF UNTUK HP / MOBILE (Max Width 768px)
+           ========================================================= */
+        @media (max-width: 768px) {
+            /* Pengecilan Font Size */
+            .hero-text h1 { font-size: 2.8rem; margin-bottom: 15px; }
+            .hero-text p { font-size: 1rem; max-width: 100%; }
+            .handwriting { font-size: 1.4rem; }
+            
+            h2, .about-text h2, .services-header h2, .split-text h2, .location-text h2 { 
+                font-size: 2.2rem; 
+                line-height: 1.3;
+            }
+            .gallery-section h2 { font-size: 2.5rem; }
+            
+            /* Navbar Mobile */
+            nav img { height: 32px; }
+            .btn { padding: 10px 20px; font-size: 0.9rem; }
+            
+            /* Jarak & Padding Mobile */
+            .hero { padding: 20px 0 60px 0; gap: 30px; }
+            .about-section, .location-section { padding: 30px 20px; border-radius: 30px; gap: 30px; }
+            
+            /* Penyesuaian About Image di Layar HP Kecil */
+            .about-img { 
+                max-width: 250px; /* Ukuran frame foto di HP diperkecil agar tidak kepanjangan */
+                margin: 0 auto; 
+            }
+            
+            /* Fitur Bawah Hero */
+            .hero-features { gap: 15px; }
+            .feature { font-size: 0.75rem; }
+            
+            /* Kotak Layanan (Services) menjadi 1 Kolom ke Bawah */
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { 
+                flex-direction: column; /* Gambar di atas, Teks di bawah */
+                align-items: center; 
+                text-align: center; 
+                padding: 25px; 
+            }
+            .service-img-wrap { width: 100%; height: 220px; margin-bottom: 15px; }
+            
+            /* Location Map */
+            .location-map { height: 250px; }
+            
+            /* CTA Banner */
+            .cta-banner { padding: 30px 20px; }
+            .cta-text i { font-size: 3rem; }
+            .cta-text h2 { font-size: 1.6rem; }
+            
+            /* Footer */
+            .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <div class="container">
+        <nav>
+            <img src="logo.png" alt="Snugpie Logo">
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#location">Location</a>
+                <a href="#services">Our Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#pricelist">Price List</a>
+            </div>
+            <a href="https://wa.me/6287839714250" target="_blank" class="btn btn-primary">
+                <i class="fa-regular fa-calendar-check"></i> Book Now
+            </a>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-text">
+                <div class="badge">Capture Your</div>
+                <h1>Special <br><span class="highlight-pink">Moments</span><br> <span class="handwriting">at Snugpie</span></h1>
+                <p>Snugpie Self Studio adalah studio foto modern dengan konsep self photo dan berbagai layanan fotografi untuk mengabadikan setiap momen spesialmu.</p>
+                <a href="#services" class="btn btn-primary">Lihat Layanan Kami <i class="fa-solid fa-arrow-right"></i></a>
+                
+                <div class="hero-features">
+                    <div class="feature"><i class="fa-solid fa-camera"></i> Modern & Aesthetic</div>
+                    <div class="feature"><i class="fa-regular fa-heart"></i> For Every Moments</div>
+                    <div class="feature"><i class="fa-regular fa-face-smile"></i> Easy Reservation</div>
+                </div>
+            </div>
+            <div class="hero-visuals">
+                <img src="hero-all.png" alt="Snugpie Moments Collage" class="hero-main-img">
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <!-- Modifikasi Wrapper Animasi Slideshow dengan Rasio 3:4 -->
+            <div class="about-img">
+                <div class="slideshow-wrapper" id="slideshow-wrapper">
+                    <!-- Memasukkan foto gallery1 sampai gallery7 untuk animasi -->
+                    <img src="gallery1.jpg" alt="Snugpie Moment 1">
+                    <img src="gallery2.jpg" alt="Snugpie Moment 2">
+                    <img src="gallery3.jpg" alt="Snugpie Moment 3">
+                    <img src="gallery4.jpg" alt="Snugpie Moment 4">
+                    <img src="gallery5.jpg" alt="Snugpie Moment 5">
+                    <img src="gallery6.jpg" alt="Snugpie Moment 6">
+                    <img src="gallery7.jpg" alt="Snugpie Moment 7">
+                </div>
+            </div>
+            <div class="about-text">
+                <div class="badge">About Snugpie</div>
+                <h2>A Cozy Space <br>for Your <span class="highlight-pink">Best Stories</span></h2>
+                <p>Snugpie Self Studio hadir sebagai ruang kreatif untuk siapa saja yang ingin mengabadikan momen berharga dengan cara yang lebih bebas, mudah, dan menyenangkan. Dengan fasilitas lengkap, suasana yang nyaman, dan berbagai pilihan layanan, Snugpie siap menemani setiap cerita spesialmu.</p>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="location-section">
+            <div class="location-text">
+                <div class="badge">Visit Us</div>
+                <h2>Lokasi <span class="highlight-pink">Studio</span></h2>
+                <p><i class="fa-solid fa-location-dot" style="color: var(--primary); margin-right: 5px;"></i> <strong>Alamat Lengkap:</strong><br> Jl. Ciwastra No.128, Mekarjaya, Kec. Rancasari, Kota Bandung, Jawa Barat 40292</p>
+                <p><i class="fa-solid fa-map-pin" style="color: var(--primary); margin-right: 5px;"></i> <strong>Patokan:</strong> Di seberang Polsek Buahbatu</p>
+                <br>
+                <a href="https://maps.app.goo.gl/5MyN9VnQW7jQ2DA36" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-map"></i> Buka di Google Maps
+                </a>
+            </div>
+            <div class="location-map">
+                <!-- Embed Google Maps -->
+                <iframe src="https://maps.google.com/maps?q=Jl.+Ciwastra+No.128,+Mekarjaya,+Kec.+Rancasari,+Kota+Bandung,+Jawa+Barat+40292&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="services-header">
+                <div>
+                    <div class="badge">Our Services</div>
+                    <h2>Choose Your <br><span class="highlight-pink">Perfect Session</span></h2>
+                </div>
+                <p style="color: var(--text-light); max-width: 300px; text-align: right;">Dari momen pribadi hingga kebutuhan profesional, Snugpie punya layanan yang sesuai untukmu.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1-8 -->
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-self.jpg" alt="Self Photo"></div>
+                    <div class="service-info">
+                        <h3>Self Photo Studio</h3>
+                        <p>Photo studio mandiri dengan remote tanpa fotografer, durasi 15 menit, semua file dikirim via GDrive.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-pas.jpg" alt="Pas Photo"></div>
+                    <div class="service-info">
+                        <h3>Pas Photo</h3>
+                        <p>Untuk kebutuhan ijazah, pekerjaan, foto formal, visa, dll.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-family.jpg" alt="Family Photo"></div>
+                    <div class="service-info">
+                        <h3>Family Photo</h3>
+                        <p>Abadikan kehangatan kebersamaan keluarga dalam satu frame.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-graduation.jpg" alt="Graduation Photo"></div>
+                    <div class="service-info">
+                        <h3>Graduation Photo</h3>
+                        <p>Merayakan momen wisuda dengan hasil foto yang elegan dan berkesan.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-birthday.jpg" alt="Birthday Photo"></div>
+                    <div class="service-info">
+                        <h3>Birthday Photo</h3>
+                        <p>Abadikan momen ulang tahun di studio dengan konsep yang seru dan berkesan.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-concept.jpg" alt="Concept Photo"></div>
+                    <div class="service-info">
+                        <h3>Concept Photo</h3>
+                        <p>Berimajinasi dengan konsep yang diinginkan dan difotokan oleh fotografer professional.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-product.jpg" alt="Product Photo"></div>
+                    <div class="service-info">
+                        <h3>Product Photo</h3>
+                        <p>Foto produk untuk usaha, UMKM maupun tugas dengan hasil yang menarik.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img-wrap"><img src="srv-rent.jpg" alt="Studio Rent"></div>
+                    <div class="service-info">
+                        <h3>Studio Rent</h3>
+                        <p>Sewa studio dengan lighting, background, bahkan bisa sekalian kameranya juga.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Collage Section -->
+        <section id="gallery" class="gallery-section">
+            <div class="badge">Our Gallery</div>
+            <h2>Moments <span class="highlight-pink">at Snugpie</span></h2>
+            <p>Klik pada gambar untuk melihat lebih jelas</p>
+            
+            <div class="collage-grid">
+                <!-- Portrait (1-6) -->
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery1.jpg')"><img src="gallery1.jpg" alt="Gallery 1"></div>
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery2.jpg')"><img src="gallery2.jpg" alt="Gallery 2"></div>
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery3.jpg')"><img src="gallery3.jpg" alt="Gallery 3"></div>
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery4.jpg')"><img src="gallery4.jpg" alt="Gallery 4"></div>
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery5.jpg')"><img src="gallery5.jpg" alt="Gallery 5"></div>
+                <div class="collage-item collage-portrait" onclick="openPopup('gallery6.jpg')"><img src="gallery6.jpg" alt="Gallery 6"></div>
+                
+                <!-- Landscape (7) -->
+                <div class="collage-item collage-landscape" onclick="openPopup('gallery7.jpg')"><img src="gallery7.jpg" alt="Gallery 7"></div>
+            </div>
+            
+            <br><br>
+            <a href="https://www.behance.net/YOUR_BEHANCE_USERNAME" target="_blank" class="btn btn-outline" style="border: 2px solid var(--primary); color: var(--primary);">
+                Lihat Gallery di Behance <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </section>
+
+        <!-- Pricelist Section -->
+        <section id="pricelist" class="split-section" style="flex-direction: row-reverse;">
+            <div class="split-text" style="padding-left: 40px;">
+                <div class="badge">Price List</div>
+                <h2>Lihat <br><span class="highlight-pink">Price List</span></h2>
+                <p>Temukan paket dan harga terbaik untuk kebutuhan fotomu. Klik tombol di bawah atau tekan gambarnya langsung.</p>
+                <!-- Trigger Pop-up via Button -->
+                <button onclick="openPopup('price.PNG')" class="btn btn-primary">Lihat Price List <i class="fa-regular fa-eye"></i></button>
+            </div>
+            <!-- Trigger Pop-up via Image -->
+            <div class="pricelist-img-wrap" onclick="openPopup('price.PNG')">
+                <img src="price.PNG" alt="Pricelist Snugpie Studio">
+            </div>
+        </section>
+
+        <!-- Call To Action -->
+        <section class="cta-banner">
+            <div class="cta-text" style="display: flex; align-items: center; gap: 20px;">
+                <i class="fa-regular fa-calendar-check" style="font-size: 4rem; opacity: 0.8;"></i>
+                <div>
+                    <h2>Siap Abadikan Momen Spesialmu?</h2>
+                    <p>Reservasi sekarang melalui WhatsApp dan dapatkan pengalaman photoshoot terbaik di Snugpie Self Studio!</p>
+                </div>
+            </div>
+            <a href="https://wa.me/6287839714250?text=Halo%20admin%20saya%20mau%20reservasi%20photoshoot" target="_blank" class="btn btn-white" style="color: var(--primary);">
+                <i class="fa-brands fa-whatsapp"></i> Reservasi via WhatsApp <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-top">
+                <img src="logo.png" alt="Snugpie Logo">
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Our Services</a>
+                    <a href="#pricelist">Price List</a>
+                    <a href="#gallery">Gallery</a>
+                </div>
+                <div style="text-align: right;">
+                    <p style="margin-bottom: 10px; font-size: 0.9rem; font-weight: 500;">Follow Us</p>
+                    <div class="social-icons">
+                        <a href="https://instagram.com/snugpie.studio" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@snugpie.studio" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://wa.me/6287839714250" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Snugpie Self Studio. All rights reserved.</p>
+                <p class="handwriting" style="font-size: 1.2rem;">Same People, Brighter You <i class="fa-regular fa-heart" style="color: var(--primary); font-size: 1rem;"></i></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Image Pop-up (Modal) Container -->
+    <div id="imagePopup" class="modal" onclick="closePopup(event)">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="popupImage">
+    </div>
+
+    <!-- Javascript untuk Pop-up & Animasi Slider About -->
+    <script>
+        // FUNGSI POPUP GAMBAR //
+        const modal = document.getElementById("imagePopup");
+        const popupImg = document.getElementById("popupImage");
+
+        function openPopup(imageSrc) {
+            modal.style.display = "flex";
+            setTimeout(() => { modal.classList.add("show"); }, 10);
+            popupImg.src = imageSrc;
+        }
+
+        function closePopup(event) {
+            if (event.target === modal || event.target.className === "close-modal") {
+                modal.classList.remove("show");
+                setTimeout(() => { modal.style.display = "none"; }, 300);
+            }
+        }
+
+        // FUNGSI ANIMASI SLIDER ABOUT SECTION //
+        const slideshowWrapper = document.getElementById('slideshow-wrapper');
+        const slideCount = slideshowWrapper.children.length;
+        let currentSlide = 0;
+
+        // Atur interval ganti foto otomatis setiap 3 detik (3000 ms)
+        setInterval(() => {
+            currentSlide++;
+            if (currentSlide >= slideCount) {
+                currentSlide = 0; // Balik ke foto pertama setelah foto terakhir
+            }
+            // Geser posisi X (-100%, -200%, dst)
+            slideshowWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }, 3000);
+    </script>
+
+</body>
+</html>
